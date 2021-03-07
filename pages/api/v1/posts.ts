@@ -11,7 +11,7 @@ const posts: NextApiHandler = (req , res) => {
   res.status(200).json(getPosts())
 }
 
-type Post = {title: string, date: number}
+type Post = { title: string, date: number }
 
 export {
   getPosts,

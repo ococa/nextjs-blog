@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {NextPage} from "next";
+import {Post} from "../api/v1/posts";
 
+type Posts = Post [];
 const PostIndex: NextPage = () => {
 
-  const [ posts, setPosts ] = useState([]);
+  const [ posts, setPosts ] = useState<Posts>([]);
 
   useEffect(() => {
     axios.get('/api/v1/posts').then(res => {
