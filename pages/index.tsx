@@ -1,7 +1,10 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css'
+import FirstPost from "./posts/first-post";
 
 export default function Home() {
+  console.log('hhh')
   return (
     <div className={styles.container}>
       <Head>
@@ -9,9 +12,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <FirstPost />
+
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          first post
+          {/*<a href="/posts/first-post">go to</a>*/}
+
+          <Link href="/posts/first-post">
+            <a >go to</a>
+          </Link>
         </h1>
 
         <p className={styles.description}>
