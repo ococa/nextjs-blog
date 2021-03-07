@@ -1,15 +1,12 @@
 // import React, { useCallback } from 'react/cjs/react.production.min';
 import Link from 'next/link';
-import React from 'react';
+import React, {useCallback} from 'react';
 
 export default function FirstPost () {
 
-  // const clickMe = useCallback(() => {
-  //   console.log('you click')
-  // }, [])
-  const clickMe = () => {
+  const clickMe = useCallback(() => {
     console.log('you click')
-  }
+  }, [])
 
   return (
     <div>
