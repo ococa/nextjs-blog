@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "babel": "babel ./src --out-dir dist --extensions '.ts,.tsx'"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -19,6 +20,9 @@
     "ua-parser-js": "^0.7.24"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-decorators": "^7.13.5",
     "@types/node": "^14.14.32",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
