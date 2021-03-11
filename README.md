@@ -23,6 +23,8 @@ eg: yarn run m:create -n CreateUsers
 
 ## operation with psql
 ```shell
+# 0. comming into docker
+docker exec -it <docker id> bash;
 # 1. connect 
 psql -U <username>
 

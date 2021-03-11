@@ -16,7 +16,19 @@ createConnection().then(async connection => {
     console.log(result)
 
 
+    const p1 = new Post();
+    p1.title = 'post 1';
+    p1.content = 'post content 1';
+    p1.author = u1;
+    const res2 = await manage.save(p1);
+    console.log(res2);
 
+    const c1 = new Comment();
+    c1.user = u1;
+    c1.post = p1;
+    c1.content = 'awesome!';
+    const r3 = await manage.save(c1);
+    console.log(r3);
     // console.log({
     //     post,
     //     comment,
