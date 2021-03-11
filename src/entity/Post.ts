@@ -10,7 +10,7 @@ import {
 import {Users} from "./Users";
 import {Comments} from "./Comments";
 
-@Entity()
+@Entity('posts')
 export class Post {
     @PrimaryGeneratedColumn('increment')
     id: number;
@@ -21,18 +21,16 @@ export class Post {
     @Column('text')
     content: string;
 
-    @Column('int')
-    author_id: number;
 
-    @CreateDateColumn('time')
+    @CreateDateColumn({ type: 'timestamp' })
     createAt: Date;
 
-    @UpdateDateColumn('time')
+    @UpdateDateColumn({ type: 'timestamp' })
     updateAt: Date;
 
     // 多个文章对应一个user
     @ManyToOne(() => Users, user => user.posts)
-    user: Users;
+    author_id: Users;
 
     // 一个post 对应多个 comment
     @OneToMany(type => Comments, (comment) => comment.post_id)

@@ -2,7 +2,7 @@ import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Upd
 import {Post} from "./Post";
 import {Comments} from "./Comments";
 
-@Entity()
+@Entity('users')
 export class Users {
 
     @PrimaryGeneratedColumn('increment')
@@ -14,10 +14,10 @@ export class Users {
     @Column('varchar')
     password: string;
 
-    @CreateDateColumn('time')
+    @CreateDateColumn()
     createAt: Date;
 
-    @UpdateDateColumn('time')
+    @UpdateDateColumn()
     updateAt: Date;
 
     // 一个用户 对应多个post（文章）

@@ -33,11 +33,11 @@ var AddCreateAtAndUpdatedAt1615422934871 = /*#__PURE__*/function () {
                 _context.next = 2;
                 return queryRunner.addColumns('users', [new _typeorm.TableColumn({
                   name: 'createAt',
-                  type: 'time',
+                  type: 'timestamp',
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
                   name: 'updateAt',
-                  type: 'time',
+                  type: 'timestamp',
                   "default": 'now()'
                 })]);
 
@@ -45,11 +45,11 @@ var AddCreateAtAndUpdatedAt1615422934871 = /*#__PURE__*/function () {
                 _context.next = 4;
                 return queryRunner.addColumns('posts', [new _typeorm.TableColumn({
                   name: 'createAt',
-                  type: 'time',
+                  type: 'timestamp',
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
                   name: 'updateAt',
-                  type: 'time',
+                  type: 'timestamp',
                   "default": 'now()'
                 })]);
 
@@ -57,11 +57,11 @@ var AddCreateAtAndUpdatedAt1615422934871 = /*#__PURE__*/function () {
                 _context.next = 6;
                 return queryRunner.addColumns('comments', [new _typeorm.TableColumn({
                   name: 'createAt',
-                  type: 'time',
+                  type: 'timestamp',
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
                   name: 'updateAt',
-                  type: 'time',
+                  type: 'timestamp',
                   "default": 'now()'
                 })]);
 

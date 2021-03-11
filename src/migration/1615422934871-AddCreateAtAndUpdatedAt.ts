@@ -4,16 +4,16 @@ export class AddCreateAtAndUpdatedAt1615422934871 implements MigrationInterface 
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.addColumns('users', [
-            new TableColumn({ name: 'createAt', type: 'time', default: 'now()' }),
-            new TableColumn({ name: 'updateAt', type: 'time', default: 'now()' })
+            new TableColumn({ name: 'createAt', type: 'timestamp', default: 'now()' }),
+            new TableColumn({ name: 'updateAt', type: 'timestamp', default: 'now()' })
         ])
         await queryRunner.addColumns('posts', [
-            new TableColumn({ name: 'createAt', type: 'time', default: 'now()' }),
-            new TableColumn({ name: 'updateAt', type: 'time', default: 'now()' })
+            new TableColumn({ name: 'createAt', type: 'timestamp', default: 'now()' }),
+            new TableColumn({ name: 'updateAt', type: 'timestamp', default: 'now()' })
         ])
         await queryRunner.addColumns('comments', [
-            new TableColumn({ name: 'createAt', type: 'time', default: 'now()' }),
-            new TableColumn({ name: 'updateAt', type: 'time', default: 'now()' })
+            new TableColumn({ name: 'createAt', type: 'timestamp', default: 'now()' }),
+            new TableColumn({ name: 'updateAt', type: 'timestamp', default: 'now()' })
         ])
     }
 
