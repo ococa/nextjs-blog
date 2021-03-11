@@ -33,7 +33,7 @@ export class Post {
     author_id: Users;
 
     // 一个post 对应多个 comment
-    @OneToMany(type => Comments, (comment) => comment.post_id)
-    comment: Comments;
+    @OneToMany(type => Comments, (comment) => comment.post)
+    comments: Comments[];
 
 }

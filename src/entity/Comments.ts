@@ -24,9 +24,9 @@ export class Comments {
 
     // 多个评论comments 对应一个用户
     @ManyToOne(() => Users, user => user.comments)
-    user_id: Users;
+    user: Users;
 
     // 多个评论对应一个文章
-    @ManyToOne(() => Post, post => post.comment)
-    post_id: Post;
+    @ManyToOne(() => Post, post => post.comments)
+    post: Post;
 }

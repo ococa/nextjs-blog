@@ -26,6 +26,6 @@ export class Users {
 
 
     // 一个用户对应多一个评论
-    @OneToMany(() => Comments, comment => comment.user_id)
+    @OneToMany(() => Comments, comment => comment.user)
     comments: Comments[];
 }

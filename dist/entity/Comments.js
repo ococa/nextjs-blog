@@ -32,15 +32,15 @@ var Comments = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.Pr
 }), _dec7 = (0, _typeorm.ManyToOne)(function () {
   return _Post.Post;
 }, function (post) {
-  return post.comment;
+  return post.comments;
 }), _dec(_class = (_class2 = (_temp = function Comments() {
   (0, _classCallCheck2["default"])(this, Comments);
   (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
   (0, _initializerDefineProperty2["default"])(this, "content", _descriptor2, this);
   (0, _initializerDefineProperty2["default"])(this, "createAt", _descriptor3, this);
   (0, _initializerDefineProperty2["default"])(this, "updateAt", _descriptor4, this);
-  (0, _initializerDefineProperty2["default"])(this, "user_id", _descriptor5, this);
-  (0, _initializerDefineProperty2["default"])(this, "post_id", _descriptor6, this);
+  (0, _initializerDefineProperty2["default"])(this, "user", _descriptor5, this);
+  (0, _initializerDefineProperty2["default"])(this, "post", _descriptor6, this);
 }, _temp), (_descriptor = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "id", [_dec2], {
   configurable: true,
   enumerable: true,
@@ -61,12 +61,12 @@ var Comments = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.Pr
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor5 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "user_id", [_dec6], {
+}), _descriptor5 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "user", [_dec6], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "post_id", [_dec7], {
+}), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "post", [_dec7], {
   configurable: true,
   enumerable: true,
   writable: true,

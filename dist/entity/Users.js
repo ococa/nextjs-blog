@@ -32,7 +32,7 @@ var Users = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.PrimaryG
 }), _dec8 = (0, _typeorm.OneToMany)(function () {
   return _Comments.Comments;
 }, function (comment) {
-  return comment.user_id;
+  return comment.user;
 }), _dec(_class = (_class2 = (_temp = function Users() {
   (0, _classCallCheck2["default"])(this, Users);
   (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
