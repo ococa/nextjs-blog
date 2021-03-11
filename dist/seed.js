@@ -10,7 +10,7 @@ require("reflect-metadata");
 
 var _typeorm = require("typeorm");
 
-var _Users = require("./entity/Users");
+var _User = require("./entity/User");
 
 (0, _typeorm.createConnection)().then( /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(connection) {
@@ -23,7 +23,7 @@ var _Users = require("./entity/Users");
             // const comment = await connection.manager.find(Comments);
             // const users = await connection.manager.find(Users);
             manage = connection.manager;
-            u1 = new _Users.Users();
+            u1 = new _User.User();
             u1.username = 'username1';
             u1.password = 'password1';
             _context.next = 6;

@@ -1,15 +1,15 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Post} from "./entity/Post";
-import {Comments} from "./entity/Comments";
-import {Users} from "./entity/Users";
+import {Comment} from "./entity/Comment";
+import {User} from "./entity/User";
 
 createConnection().then(async connection => {
     // const post = await connection.manager.find(Post);
     // const comment = await connection.manager.find(Comments);
     // const users = await connection.manager.find(Users);
     const manage = connection.manager;
-    const u1 = new Users();
+    const u1 = new User();
     u1.username = 'username1';
     u1.password = 'password1';
     const result = await manage.save(u1)

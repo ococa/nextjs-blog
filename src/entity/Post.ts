@@ -7,8 +7,8 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import {Users} from "./Users";
-import {Comments} from "./Comments";
+import {User} from "./User";
+import {Comment} from "./Comment";
 
 @Entity('posts')
 export class Post {
@@ -21,19 +21,18 @@ export class Post {
     @Column('text')
     content: string;
 
+    // 多个文章对应一个user
+    @ManyToOne(type => User, user => user.posts)
+    author: User;
+
+    // 一个post 对应多个 comment
+    @OneToMany(type => Comment, (comment) => comment.post)
+    comments: Comment[];
+
 
     @CreateDateColumn({ type: 'timestamp' })
     createAt: Date;
 
     @UpdateDateColumn({ type: 'timestamp' })
     updateAt: Date;
-
-    // 多个文章对应一个user
-    @ManyToOne(() => Users, user => user.posts)
-    author_id: Users;
-
-    // 一个post 对应多个 comment
-    @OneToMany(type => Comments, (comment) => comment.post)
-    comments: Comments[];
-
 }

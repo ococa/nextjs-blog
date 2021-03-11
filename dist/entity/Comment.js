@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Comments = void 0;
+exports.Comment = void 0;
 
 var _initializerDefineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/initializerDefineProperty"));
 
@@ -19,22 +19,22 @@ var _initializerWarningHelper2 = _interopRequireDefault(require("@babel/runtime/
 
 var _typeorm = require("typeorm");
 
-var _Users = require("./Users");
+var _User = require("./User");
 
 var _Post = require("./Post");
 
 var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _temp;
 
-var Comments = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec3 = (0, _typeorm.Column)('text'), _dec4 = (0, _typeorm.CreateDateColumn)(), _dec5 = (0, _typeorm.UpdateDateColumn)(), _dec6 = (0, _typeorm.ManyToOne)(function () {
-  return _Users.Users;
+var Comment = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec3 = (0, _typeorm.Column)('text'), _dec4 = (0, _typeorm.CreateDateColumn)(), _dec5 = (0, _typeorm.UpdateDateColumn)(), _dec6 = (0, _typeorm.ManyToOne)(function () {
+  return _User.User;
 }, function (user) {
   return user.comments;
 }), _dec7 = (0, _typeorm.ManyToOne)(function () {
   return _Post.Post;
 }, function (post) {
   return post.comments;
-}), _dec(_class = (_class2 = (_temp = function Comments() {
-  (0, _classCallCheck2["default"])(this, Comments);
+}), _dec(_class = (_class2 = (_temp = function Comment() {
+  (0, _classCallCheck2["default"])(this, Comment);
   (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
   (0, _initializerDefineProperty2["default"])(this, "content", _descriptor2, this);
   (0, _initializerDefineProperty2["default"])(this, "createAt", _descriptor3, this);
@@ -72,4 +72,4 @@ var Comments = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.Pr
   writable: true,
   initializer: null
 })), _class2)) || _class);
-exports.Comments = Comments;
+exports.Comment = Comment;
