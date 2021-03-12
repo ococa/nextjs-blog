@@ -2,74 +2,39 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css'
 import FirstPost from "./posts/first-post";
+import {GetServerSideProps, NextPage} from "next";
+import {Connection, createConnection} from "typeorm";
+import {User} from "../src/entity/User";
+import {getDatabaseConnection} from "../src/utils";
 
-export default function Home() {
-  console.log('hhh')
+type Props = {
+  browser: string,
+  post: string
+}
+const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <FirstPost />
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          first post
-          {/*<a href="/posts/first-post">go to</a>*/}
-
-          <Link href="/posts/first-post">
-            <a >go to</a>
-          </Link>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      { props?.post }
     </div>
   )
+}
+
+export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  // const connection = await createConnection();
+  // console.log(connection);
+  // const a = await connection.manager.find('users');
+  // console.log(a);
+  // await connection.close();
+  // console.log('hhhh1')
+  const connection = await getDatabaseConnection();
+  console.log('connection')
+  const a = await connection.manager.find('users');
+  return Promise.resolve({
+    props: {
+      browser: '123123',
+      post: JSON.stringify(a)
+    }
+  })
 }
