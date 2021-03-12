@@ -12,17 +12,16 @@ const create = () => {
         ...config,
         entities: [Post, User, Comment]
     })
-    // connection.manager.find(User);
 }
 
+// 解决connect 多次创建报错问题
 const promise = (async function () {
     const manage = getConnectionManager();
-    if (!manage.has('default')) {
-        return create();
-    } else {
-        return manage.get('default');
+    if (manage.has('default')) {
         // 还可以加一个is connect的判断
+        await manage.get('default').close();
     }
+    return create();
 })();
 
 // export
