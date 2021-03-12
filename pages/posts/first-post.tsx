@@ -1,4 +1,3 @@
-// import React, { useCallback } from 'react/cjs/react.production.min';
 import Link from 'next/link';
 import React, {useCallback} from 'react';
 

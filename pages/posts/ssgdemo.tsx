@@ -1,5 +1,3 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
 import {GetStaticProps, NextPage} from "next";
 import {getPosts, Post} from "../api/v1/posts";
 
