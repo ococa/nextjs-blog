@@ -1,8 +1,9 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn} from "typeorm";
 import {Post} from "./Post";
 import {Comment} from "./Comment";
 
 @Entity('users')
+@Unique(['username'])
 export class User {
 
     @PrimaryGeneratedColumn('increment')
@@ -28,5 +29,10 @@ export class User {
     // 一个用户对应多一个评论
     @OneToMany(() => Comment, comment => comment.user)
     comments: Comment[];
+
+    constructor(username: string, password: string) {
+        this.username = username;
+        this.password = password
+    }
 
 }

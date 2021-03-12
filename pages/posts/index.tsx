@@ -1,5 +1,3 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
 import {GetServerSideProps, NextPage} from 'next';
 import {getDatabaseConnection} from '../../src/utils';
 import { Post } from "src/entity/Post";

@@ -37,4 +37,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-./blog-data
+./blog-data/*
+blog-data/*
