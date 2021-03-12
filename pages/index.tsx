@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css'
 import {GetServerSideProps, NextPage} from "next";
 import {getDatabaseConnection} from "../src/utils";
 import {Post} from "../src/entity/Post";
-import {User} from "../src/entity/User";
+import Link from 'next/link';
 
 type Props = {
   browser: string,
@@ -11,7 +11,13 @@ type Props = {
 const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
-      { props?.posts.map(i => <div>{i?.content}</div>) }
+      <h1>文章列表</h1>
+      {
+        props?.posts.map(i => (
+          <Link href={`/posts/${i?.id}`}>
+            <a>{i?.content}</a>
+          </Link>))
+      }
     </div>
   )
 }

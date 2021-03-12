@@ -1,28 +1,43 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {NextPage} from "next";
-import {Post} from "../api/v1/posts";
+import {GetServerSideProps, NextPage} from 'next';
+import {getDatabaseConnection} from '../../src/utils';
+import { Post } from "src/entity/Post";
 
-type Posts = Post [];
-const PostIndex: NextPage = () => {
+type Props = {
+  post: {
+    title: string,
+    content: string,
+    user: number,
+  },
+  ctx
+}
+const PostIndex: NextPage<Props> = (props) => {
 
-  const [ posts, setPosts ] = useState<Posts>([]);
-
-  useEffect(() => {
-    axios.get('/api/v1/posts').then(res => {
-      console.log('res', { res })
-      setPosts(res.data)
-    })
-  }, [])
-
+  console.log(props.ctx)
   return (
     <div>
-      文章列表
-      { posts.map(i => (
-        <div key={i?.title}>name: {i?.title}</div>
-      ))}
+      文章标题：
+      { props.post.title }
+      文章内容：
+      { props.post.content }
+
     </div>
   )
 }
 
 export default PostIndex;
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const post = { title: '123', content: '123' }
+  const connection = await getDatabaseConnection();
+  const a = await connection.manager.find(Post);
+
+  console.log(ctx)
+  return Promise.resolve({
+    props: {
+      post,
+    }
+  })
+}
