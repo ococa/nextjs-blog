@@ -37,3 +37,17 @@ psql -U <username>
 \dt 
 
 ```
+
+
+
+## setting environment(两种配置密钥的方式)
+1. 设置bash环境
+```shell
+##  密钥存储， 设置环境变量
+export COOKIE_SECRET=670344603478587867034460347858786703446034785878
+
+## 获取方式
+process.env.process.env.COOKIE_SECRET
+```
+2. 第二种 .env.local文件方式
+   https://nextjs.org/docs/basic-features/environment-variables

@@ -3,8 +3,8 @@ import { withIronSession } from 'next-iron-session'
 
 export default function withSession(handler) {
     return withIronSession(handler, {
-        // password: process.env.SECRET_COOKIE_PASSWORD,
-        password: '670344603478587867034460347858786703446034785878', // 用来加密的随机数
+        // password: process.env.COOKIE_SECRET,
+        password:  process.env.COOKIE_SECRET, // 用来加密的随机数
         cookieName: 'blog',
         // cookieOptions: {
         //     // the next line allows to use the session in non-https environments like
