@@ -11,29 +11,26 @@ type RegisterForm = {
 
 const RegisterIndex: NextPage = () => {
 
-    const [signUpData, setSignUpData] = useState<RegisterForm>({});
+    const [formData, setFormData] = useState<RegisterForm>({});
 
     const [errors, setErrors] = useState({});
 
     const onsubmit = useCallback((e) => {
         e.preventDefault();
-        request('/api/v1/register', {
-            username: signUpData.username,
-            password: signUpData.password,
-            passwordConfirmation: signUpData.passwordConfirmation,
+        request('/api/v1/sessions', {
+            username: formData.username,
+            password: formData.password,
         }).then(res => {
             console.log(res)
-
-            window.location.href = '/login'
         }).catch(e => {
             console.log(e)
             setErrors(e.response)
         })
-        console.log(signUpData)
-    }, [signUpData])
+        console.log(formData)
+    }, [formData])
     return (<div>
         <hr/>
-        <h1>register</h1>
+        <h1>login </h1>
         <hr/>
         <form onSubmit={onsubmit}>
             <div>
@@ -42,9 +39,9 @@ const RegisterIndex: NextPage = () => {
                 </label>
                 <input
                     type="text"
-                    value={signUpData.username}
+                    value={formData.username}
                     onChange={(e) => {
-                        setSignUpData({...signUpData, username: e.target.value})
+                        setFormData({...formData, username: e.target.value})
                     }}
                 />
             </div>
@@ -55,25 +52,14 @@ const RegisterIndex: NextPage = () => {
                 </label>
                 <input
                     type="password"
-                    value={signUpData.password}
+                    value={formData.password}
                     onChange={(e) => {
-                        setSignUpData({...signUpData, password: e.target.value})
+                        setFormData({...formData, password: e.target.value})
                     }}
                 />
             </div>
-            <div>
-                <label htmlFor="password">
-                    confirm password
-                </label>
-                <input
-                    type="password"
-                    value={signUpData.passwordConfirmation}
-                    onChange={(e) => {
-                        setSignUpData({...signUpData, passwordConfirmation: e.target.value})
-                    }}
-                />
-            </div>
-            <button>zhuce</button>
+
+            <button>login</button>
         </form>
     </div>)
 }
@@ -82,8 +68,6 @@ export default RegisterIndex;
 
 export const getServerSideProps: GetServerSideProps = (ctx) => {
     return Promise.resolve({
-        props: {
-            a: '123'
-        }
+        props: {}
     })
 }

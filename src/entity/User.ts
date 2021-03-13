@@ -48,7 +48,7 @@ export class User {
     @OneToMany(() => Comment, comment => comment.user)
     comments: Comment[];
 
-    constructor(username: string, password: string, passwordConfirmation) {
+    constructor(username: string, password: string, passwordConfirmation?: string) {
         this.username = username;
         this.password = password;
         this.passwordOrigin = password;

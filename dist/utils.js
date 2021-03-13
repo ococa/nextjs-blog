@@ -71,10 +71,9 @@ var getDatabaseConnection = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log(promise);
             return _context2.abrupt("return", promise);
 
-          case 2:
+          case 1:
           case "end":
             return _context2.stop();
         }

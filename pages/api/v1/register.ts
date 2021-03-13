@@ -1,8 +1,8 @@
 import {getDatabaseConnection} from "../../../src/utils";
 import {User} from "../../../src/entity/User";
-import md5 from "md5";
+import {NextApiHandler} from "next";
 
-export default async (req, res) => {
+const register: NextApiHandler = async (req, res) => {
     const { username, password, passwordConfirmation } = req.body;
 
     const user = new User(username, password, passwordConfirmation);
@@ -14,5 +14,8 @@ export default async (req, res) => {
         const connection = await getDatabaseConnection()
         result = await connection.manager.save(user);
     }
-    res.status(200).json(result)
+    res.status(200).json(result);
 }
+
+
+export default register
