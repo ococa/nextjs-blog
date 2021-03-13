@@ -1,6 +1,7 @@
 import {GetServerSideProps, NextPage} from 'next';
 import {useCallback, useState} from 'react';
 import request from "../../package/utils/req";
+import withSession from "../../package/utils/withSession";
 
 
 type RegisterForm = {
@@ -66,8 +67,9 @@ const RegisterIndex: NextPage = () => {
 
 export default RegisterIndex;
 
-export const getServerSideProps: GetServerSideProps = (ctx) => {
+export const getServerSideProps: GetServerSideProps = withSession((ctx) => {
+    console.log(ctx.req.session.get('currentUser'));
     return Promise.resolve({
         props: {}
     })
-}
+})

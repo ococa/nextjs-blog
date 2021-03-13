@@ -13,11 +13,12 @@ export class Login {
         }
         const connection = await getDatabaseConnection();
         const user = await connection.manager.findOne(User, { where: { username } })
-        if (user.username && user.password === md5(password)) {
-            this.errors.username.push('login success')
-        } else {
-            this.errors.username.push('login success')
+        if (!user.username || user.password !== md5(password)) {
+            this.errors.username.push('login error')
         }
+        // else {
+            // this.errors.username.push('login success')
+        // }
     }
 
     errors = { username: [], password: []}
