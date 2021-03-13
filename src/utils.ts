@@ -26,7 +26,6 @@ const promise = (async function () {
 
 // export
 const getDatabaseConnection = async () => {
-    console.log(promise)
     return promise;
 }
 

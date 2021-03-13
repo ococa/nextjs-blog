@@ -1,6 +1,13 @@
 import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn} from "typeorm";
 import {Post} from "./Post";
 import {Comment} from "./Comment";
+import {getDatabaseConnection} from "../utils";
+
+type errors = {
+    username?: string [],
+    password?: string [],
+    passwordConfirmation?: string [],
+}
 
 @Entity('users')
 @Unique(['username'])
@@ -30,9 +37,36 @@ export class User {
     @OneToMany(() => Comment, comment => comment.user)
     comments: Comment[];
 
-    constructor(username: string, password: string) {
+    constructor(username: string, password: string, passwordConfirmation) {
         this.username = username;
-        this.password = password
+        this.password = password;
+        this.passwordOrigin = password;
+        this.passwordConfirmation = passwordConfirmation;
     }
 
+    errors: errors = { username: [], password: [], passwordConfirmation: []};
+
+    passwordConfirmation: string;
+
+    passwordOrigin: string;
+
+    async validate() {
+        const { username, passwordOrigin, passwordConfirmation } = this;
+        if (!username || !passwordOrigin || !passwordConfirmation) {
+            this.errors.username.push('username or password cant be null');
+        }
+        if (passwordOrigin !== passwordConfirmation) {
+            this.errors.password.push('the password is different');
+            return;
+        }
+        const connection = await getDatabaseConnection();
+            // console.log(connection)
+        const userList = await connection.manager.find(User, { username });
+        if (userList.length > 0) {
+            this.errors.username.push('username is already register');
+        }
+    }
+    hasErrors() {
+        return !!Object.values(this.errors).find(v => v.length > 0)
+    }
 }
