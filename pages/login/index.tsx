@@ -1,9 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { useCallback, useState } from 'react';
 import request from "../../package/utils/req";
 import withSession from "../../package/utils/withSession";
-import Form from "../../package/component/form";
-
+import useForm from "../../package/utils/useForm";
 
 type RegisterForm = {
   username?: string,
@@ -11,52 +9,40 @@ type RegisterForm = {
 }
 
 const RegisterIndex: NextPage = () => {
+  const formData = {
+      username: '',
+      password: '',
+  }
 
-  const [formData, setFormData] = useState<RegisterForm>({
-    username: '',
-    password: '',
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const onsubmit = useCallback((e) => {
-    e.preventDefault();
+  const onSubmit = (fd) => {
+    console.log(fd.username)
     request('/api/v1/sessions', {
-      username: formData.username,
-      password: formData.password,
+      username: fd.username,
+      password: fd.password,
     }).then(res => {
       console.log(res)
     }).catch(e => {
       console.log(e)
-      setErrors(e.response)
     })
-    console.log(formData)
-  }, [formData])
+  };
+  const fileds = [
+    {
+      label: '用户名', key: 'username'
+    },
+    {
+      label: '密码', key: 'password', type: "password",
+    }
+  ]
 
-  const onChangeHandler = useCallback(({key, value}) => {
-    setFormData({...formData, [key]: value})
-  }, [formData])
+  const buttons = <button>login</button>
+  // @ts-ignore
+  const { form } = useForm<RegisterForm>(formData, fileds, onSubmit, buttons)
 
   return (<div>
     <hr/>
     <h1>login </h1>
     <hr/>
-    <Form
-      fields={[
-        {
-          label: '用户名', value: formData.username,
-          onChange: e=> onChangeHandler({key:'username', value: e.target.value}),
-        },
-        {
-          label: '密码', value: formData.password, type: "password",
-          onChange: e=> onChangeHandler({key:'password', value: e.target.value}),
-        }
-      ]}
-      onSubmit={onsubmit}
-      buttons={
-        <button>login</button>
-      }
-    />
+      {form}
     <hr/>
   </div>)
 }
@@ -64,7 +50,6 @@ const RegisterIndex: NextPage = () => {
 export default RegisterIndex;
 
 export const getServerSideProps: GetServerSideProps = withSession((ctx) => {
-  console.log(ctx.req.session.get('currentUser'));
   return Promise.resolve({
     props: {}
   })

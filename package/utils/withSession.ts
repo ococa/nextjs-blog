@@ -6,10 +6,11 @@ export default function withSession(handler) {
         // password: process.env.COOKIE_SECRET,
         password:  process.env.COOKIE_SECRET, // 用来加密的随机数
         cookieName: 'blog',
-        // cookieOptions: {
+        cookieOptions: {
         //     // the next line allows to use the session in non-https environments like
         //     // Next.js dev mode (http://localhost:3000)
         //     secure: process.env.NODE_ENV === 'production' ? true : false,
-        // },
+            secure: false
+        },
     })
 }

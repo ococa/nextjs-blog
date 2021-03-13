@@ -25,8 +25,9 @@ const Form: React.FC<Props> = (props) => {
                   // id=""
                   // cols="30"
                   // rows="10"
+                  value={field.value}
                   onChange={field.onChange}
-                >{field.value}</textarea> :
+                /> :
                 <input
                   type={field.type || 'text'}
                   value={field.value}
