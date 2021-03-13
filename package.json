@@ -14,8 +14,10 @@
     "e:create": "typeorm entity:create"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.168",
     "@types/md5": "^2.3.0",
     "axios": "^0.21.1",
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "next": "10.0.8",
     "pg": "^8.5.1",

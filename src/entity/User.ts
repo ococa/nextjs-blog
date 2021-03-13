@@ -12,6 +12,7 @@ import {Post} from "./Post";
 import {Comment} from "./Comment";
 import {getDatabaseConnection} from "../utils";
 import md5 from "md5";
+import _ from "lodash";
 
 type errors = {
     username?: string [],
@@ -83,5 +84,9 @@ export class User {
     @BeforeInsert()
     generatePasswordDigest() {
         this.password = md5(this.passwordOrigin);
+    }
+
+    toJSON() {
+       return _.omit(this, ['password', 'passwordOrigin', 'passwordConfirmation'])
     }
 }
