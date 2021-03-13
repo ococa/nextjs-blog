@@ -1,89 +1,79 @@
-import {GetServerSideProps, NextPage} from 'next';
-import {useCallback, useState} from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import { useCallback, useState } from 'react';
 import request from "../../package/utils/req";
+import Form from "../../package/component/form";
 
 
 type RegisterForm = {
-    username?: string,
-    password?: string,
-    passwordConfirmation?: string,
+  username?: string,
+  password?: string,
+  passwordConfirmation?: string,
 }
 
 const RegisterIndex: NextPage = () => {
 
-    const [signUpData, setSignUpData] = useState<RegisterForm>({});
+  const [formData, setFormData] = useState<RegisterForm>({});
 
-    const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-    const onsubmit = useCallback((e) => {
-        e.preventDefault();
-        request('/api/v1/register', {
-            username: signUpData.username,
-            password: signUpData.password,
-            passwordConfirmation: signUpData.passwordConfirmation,
-        }).then(res => {
-            console.log(res)
+  const onsubmit = useCallback((e) => {
+    e.preventDefault();
+    request('/api/v1/register', {
+      username: formData.username,
+      password: formData.password,
+      passwordConfirmation: formData.passwordConfirmation,
+    }).then(res => {
+      console.log('register')
+      console.log(res);
+      console.log('register')
 
-            window.location.href = '/login'
-        }).catch(e => {
-            console.log(e)
-            setErrors(e.response)
-        })
-        console.log(signUpData)
-    }, [signUpData])
-    return (<div>
-        <hr/>
-        <h1>register</h1>
-        <hr/>
-        <form onSubmit={onsubmit}>
-            <div>
-                <label htmlFor="username">
-                    username
-                </label>
-                <input
-                    type="text"
-                    value={signUpData.username}
-                    onChange={(e) => {
-                        setSignUpData({...signUpData, username: e.target.value})
-                    }}
-                />
-            </div>
+      // window.location.href = '/login'
+    }).catch(e => {
+      console.error('register')
+      console.error(e);
+      console.error('register')
+      setErrors(e.response)
+    })
+    console.log(formData)
+  }, [formData])
 
-            <div>
-                <label htmlFor="password">
-                    password
-                </label>
-                <input
-                    type="password"
-                    value={signUpData.password}
-                    onChange={(e) => {
-                        setSignUpData({...signUpData, password: e.target.value})
-                    }}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">
-                    confirm password
-                </label>
-                <input
-                    type="password"
-                    value={signUpData.passwordConfirmation}
-                    onChange={(e) => {
-                        setSignUpData({...signUpData, passwordConfirmation: e.target.value})
-                    }}
-                />
-            </div>
-            <button>zhuce</button>
-        </form>
-    </div>)
+  const onChangeHandler = useCallback(({key, value}) => {
+    setFormData({...formData, [key]: value})
+  }, [formData])
+
+  return (<div>
+    <hr/>
+    <h1>register</h1>
+    <hr/>
+    <Form
+      fields={[
+        {
+          label: '用户名', value: formData.username,
+          onChange: e => onChangeHandler({key: 'username', value: e.target.value}),
+        },
+        {
+          label: '密码', value: formData.password, type: "password",
+          onChange: e => onChangeHandler({key: 'password', value: e.target.value}),
+        },
+        {
+          label: '密码', value: formData.passwordConfirmation, type: "password",
+          onChange: e => onChangeHandler({key: 'passwordConfirmation', value: e.target.value}),
+        }
+      ]}
+      onSubmit={onsubmit}
+      buttons={
+        <button>zhuce</button>
+      }
+    />
+  </div>)
 }
 
 export default RegisterIndex;
 
 export const getServerSideProps: GetServerSideProps = (ctx) => {
-    return Promise.resolve({
-        props: {
-            a: '123'
-        }
-    })
+  return Promise.resolve({
+    props: {
+      a: '123'
+    }
+  })
 }

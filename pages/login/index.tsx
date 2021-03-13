@@ -1,75 +1,71 @@
-import {GetServerSideProps, NextPage} from 'next';
-import {useCallback, useState} from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import { useCallback, useState } from 'react';
 import request from "../../package/utils/req";
 import withSession from "../../package/utils/withSession";
+import Form from "../../package/component/form";
 
 
 type RegisterForm = {
-    username?: string,
-    password?: string,
-    passwordConfirmation?: string,
+  username?: string,
+  password?: string,
 }
 
 const RegisterIndex: NextPage = () => {
 
-    const [formData, setFormData] = useState<RegisterForm>({});
+  const [formData, setFormData] = useState<RegisterForm>({
+    username: '',
+    password: '',
+  });
 
-    const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-    const onsubmit = useCallback((e) => {
-        e.preventDefault();
-        request('/api/v1/sessions', {
-            username: formData.username,
-            password: formData.password,
-        }).then(res => {
-            console.log(res)
-        }).catch(e => {
-            console.log(e)
-            setErrors(e.response)
-        })
-        console.log(formData)
-    }, [formData])
-    return (<div>
-        <hr/>
-        <h1>login </h1>
-        <hr/>
-        <form onSubmit={onsubmit}>
-            <div>
-                <label htmlFor="username">
-                    username
-                </label>
-                <input
-                    type="text"
-                    value={formData.username}
-                    onChange={(e) => {
-                        setFormData({...formData, username: e.target.value})
-                    }}
-                />
-            </div>
+  const onsubmit = useCallback((e) => {
+    e.preventDefault();
+    request('/api/v1/sessions', {
+      username: formData.username,
+      password: formData.password,
+    }).then(res => {
+      console.log(res)
+    }).catch(e => {
+      console.log(e)
+      setErrors(e.response)
+    })
+    console.log(formData)
+  }, [formData])
 
-            <div>
-                <label htmlFor="password">
-                    password
-                </label>
-                <input
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) => {
-                        setFormData({...formData, password: e.target.value})
-                    }}
-                />
-            </div>
+  const onChangeHandler = useCallback(({key, value}) => {
+    setFormData({...formData, [key]: value})
+  }, [formData])
 
-            <button>login</button>
-        </form>
-    </div>)
+  return (<div>
+    <hr/>
+    <h1>login </h1>
+    <hr/>
+    <Form
+      fields={[
+        {
+          label: '用户名', value: formData.username,
+          onChange: e=> onChangeHandler({key:'username', value: e.target.value}),
+        },
+        {
+          label: '密码', value: formData.password, type: "password",
+          onChange: e=> onChangeHandler({key:'password', value: e.target.value}),
+        }
+      ]}
+      onSubmit={onsubmit}
+      buttons={
+        <button>login</button>
+      }
+    />
+    <hr/>
+  </div>)
 }
 
 export default RegisterIndex;
 
 export const getServerSideProps: GetServerSideProps = withSession((ctx) => {
-    console.log(ctx.req.session.get('currentUser'));
-    return Promise.resolve({
-        props: {}
-    })
+  console.log(ctx.req.session.get('currentUser'));
+  return Promise.resolve({
+    props: {}
+  })
 })
