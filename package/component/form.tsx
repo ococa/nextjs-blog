@@ -3,9 +3,9 @@ import React, { ChangeEventHandler, FormEventHandler, ReactChild } from "react";
 type Props = {
   fields: {
     label: string,
-    type?: 'text' | 'password',
+    type?: 'text' | 'password' | 'textarea',
     value: string | number,
-    onChange: ChangeEventHandler<HTMLInputElement>,
+    onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
   }[];
   onSubmit: FormEventHandler,
   buttons: ReactChild
@@ -19,11 +19,21 @@ const Form: React.FC<Props> = (props) => {
           fields.map(field => (
             <div key={field.label}>
               <label>{field.label}</label>
-              <input
-                type={field.type || 'texts'}
-                value={field.value}
-                onChange={field.onChange}
-              />
+              { field.type === 'textarea' ?
+                <textarea
+                  // name=""
+                  // id=""
+                  // cols="30"
+                  // rows="10"
+                  onChange={field.onChange}
+                >{field.value}</textarea> :
+                <input
+                  type={field.type || 'text'}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              }
+
               <div>
               </div>
             </div>
