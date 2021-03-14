@@ -22,11 +22,11 @@ export class Post {
     content: string;
 
     // 多个文章对应一个user
-    @ManyToOne(type => User, user => user.posts)
+    @ManyToOne('User', 'posts')
     author: User;
 
     // 一个post 对应多个 comment
-    @OneToMany(type => Comment, (comment) => comment.post)
+    @OneToMany('Comment', 'post')
     comments: Comment[];
 
 

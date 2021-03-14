@@ -13,7 +13,7 @@ const Sessions: NextApiHandler = withSession(async(req, res) => {
         res.json({ isError: true, msg: login.errors});
         res.end();
     } else {
-        req.session.set('currentUser', login.id);
+        req.session.set('currentUser', login);
         await req.session.save()
         res.setHeader('Content-Type', 'application/json; charset=utf8');
         res.statusCode = 200;

@@ -17,10 +17,10 @@ export class Comment {
     updateAt: Date;
 
     // 多个评论comments 对应一个用户
-    @ManyToOne(() => User, user => user.comments)
+    @ManyToOne('User', 'comments')
     user: User;
 
     // 多个评论对应一个文章
-    @ManyToOne(() => Post, post => post.comments)
+    @ManyToOne('Post', 'comments')
     post: Post;
 }

@@ -40,12 +40,12 @@ export class User {
     updateAt: Date;
 
     // 一个用户 对应多个post（文章）
-    @OneToMany(() => Post, post => post.author)
+    @OneToMany('Post', 'author')
     posts: Post[];
 
 
     // 一个用户对应多一个评论
-    @OneToMany(() => Comment, comment => comment.user)
+    @OneToMany('Comment', 'user')
     comments: Comment[];
 
     constructor(username: string, password: string, passwordConfirmation?: string) {

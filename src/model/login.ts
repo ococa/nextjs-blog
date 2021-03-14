@@ -1,12 +1,13 @@
 import {getDatabaseConnection} from "../utils";
 import {User} from "../entity/User";
 import md5 from "md5";
+import _ from "lodash";
 
 export class Login {
 
     id: number;
 
-    constructor(public username: string, public password: string) {
+    constructor(public username: string, private password: string) {
     }
 
     async validate() {
@@ -29,5 +30,8 @@ export class Login {
 
     hasErrors() {
         return !!Object.values(this.errors).find(v => v.length > 0)
+    }
+    toJSON() {
+        return _.omit(this, ['password', 'passwordOrigin', 'passwordConfirmation'])
     }
 }
