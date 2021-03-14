@@ -9,9 +9,7 @@ createConnection().then(async connection => {
     // const comment = await connection.manager.find(Comments);
     // const users = await connection.manager.find(Users);
     const manage = connection.manager;
-    const u1 = new User();
-    u1.username = 'username1';
-    u1.password = 'password1';
+    const u1 = new User('username1', 'password1');
     const result = await manage.save(u1)
     console.log(result)
 

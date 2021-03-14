@@ -27,33 +27,31 @@ var _User = require("./entity/User");
             // const comment = await connection.manager.find(Comments);
             // const users = await connection.manager.find(Users);
             manage = connection.manager;
-            u1 = new _User.User();
-            u1.username = 'username1';
-            u1.password = 'password1';
-            _context.next = 6;
+            u1 = new _User.User('username1', 'password1');
+            _context.next = 4;
             return manage.save(u1);
 
-          case 6:
+          case 4:
             result = _context.sent;
             console.log(result);
             p1 = new _Post.Post();
             p1.title = 'post 1';
             p1.content = 'post content 1';
             p1.author = u1;
-            _context.next = 14;
+            _context.next = 12;
             return manage.save(p1);
 
-          case 14:
+          case 12:
             res2 = _context.sent;
             console.log(res2);
             c1 = new _Comment.Comment();
             c1.user = u1;
             c1.post = p1;
             c1.content = 'awesome!';
-            _context.next = 22;
+            _context.next = 20;
             return manage.save(c1);
 
-          case 22:
+          case 20:
             r3 = _context.sent;
             console.log(r3); // console.log({
             //     post,
@@ -61,10 +59,10 @@ var _User = require("./entity/User");
             //     users,
             // })
 
-            _context.next = 26;
+            _context.next = 24;
             return connection.close();
 
-          case 26:
+          case 24:
           case "end":
             return _context.stop();
         }

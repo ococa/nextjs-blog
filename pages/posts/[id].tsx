@@ -26,6 +26,8 @@ export default PostIndex;
 export const getServerSideProps: GetServerSideProps<any, { id: string }> = async (ctx) => {
     const connection = await getDatabaseConnection();
     const a = await connection.manager.findOne(Post, ctx.params.id);
+    console.log('a')
+    console.log(a)
     return Promise.resolve({
         props: {
             post: JSON.parse(JSON.stringify(a)),
