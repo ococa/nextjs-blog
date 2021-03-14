@@ -12,14 +12,14 @@ type Props = {
     value: string | number,
     onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
   }[];
-  onSubmit: FormEventHandler,
-  buttons: ReactChild
+  onSubmit: FormEventHandler;
+  buttons: ReactChild;
 }
 
 type Field<T> = {
-  label: string,
-  type?: 'text' | 'password' | 'textarea' | string,
-  key: keyof T
+  label: string;
+  type?: 'text' | 'password' | 'textarea' | string;
+  key: keyof T;
 };
 
 function useForm<T>(initData: T, fields: Field<T>[], onSubmit: (fd: T) => void, buttons: ReactChild) {

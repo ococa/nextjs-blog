@@ -1,51 +1,41 @@
 import {NextPage} from "next";
-import Form from "../../package/component/form";
-import { useCallback, useState } from "react";
 import request from "../../package/utils/req";
+import useForm from "../../package/utils/useForm";
 
 const PostsNew: NextPage = () => {
-
-  const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-  });
-
-
-  const onsubmit = useCallback((e) => {
-    e.preventDefault();
-    request('/api/v1/post/new', {
-      ...formData
+  const onSubmit = (fd) => {
+    console.log(fd.username)
+    request('/api/v1/posts', {
+      username: fd.username,
+      password: fd.password,
     }).then(res => {
       console.log(res)
     }).catch(e => {
-      console.error(e)
+      console.log(e)
     })
-  }, [formData])
+  };
 
-  const onChangeHandler = useCallback(({key, value}) => {
-    setFormData({...formData, [key]: value})
-  }, [formData])
+  const formData = {
+    title: '',
+    content: '',
+  }
 
+  const fileds = [
+    {
+      label: '文章标题', key: 'title'
+    },
+    {
+      label: '文章内容', key: 'content', type: "textarea",
+    }
+  ]
 
+  const buttons = <button>login</button>
+  // @ts-ignore
+  const { form } = useForm<RegisterForm>(formData, fileds, onSubmit, buttons)
 
   return (
         <div>
-          <Form
-            fields={[
-              {
-                label: '标题', value: formData.title,
-                onChange: e=> onChangeHandler({key:'title', value: e.target.value}),
-              },
-              {
-                label: '密码', value: formData.content, type: "textarea",
-                onChange: e=> onChangeHandler({key:'content', value: e.target.value}),
-              }
-            ]}
-            onSubmit={onsubmit}
-            buttons={
-              <button>提交</button>
-            }
-          />
+          { form }
         </div>
     );
 }
