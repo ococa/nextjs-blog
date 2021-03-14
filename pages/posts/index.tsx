@@ -29,7 +29,8 @@ const PostIndex: NextPage<Props> = (props) => {
   const { posts, pagination: { pageSize, pageNo, count} } = props;
   console.log('page', {
     pageSize,
-    pageNo
+    pageNo,
+    count
   })
   return (
     <div>
@@ -45,17 +46,23 @@ const PostIndex: NextPage<Props> = (props) => {
       <hr/>
       <footer>
         <div>
-          <Link
-            href={`/posts/?pageSize=${pageSize}&pageNo=${pageNo - 1}`}>
+          { pageNo !== 1 && <Link
+            href={`/posts/?pageSize=${pageSize}&pageNo=${pageNo - 1}`}
+          >
             <a>上一页</a>
-          </Link>
+          </Link>}
         </div>
         <div>
-          <Link href={`/posts/?pageSize=${pageSize}&pageNo=${pageNo + 1}`}>
-            <a>下一页</a>
-          </Link>
+          {
+            Math.ceil(count/pageSize) !== pageNo && <Link
+              href={`/posts/?pageSize=${pageSize}&pageNo=${pageNo + 1}`}
+            >
+              <a>下一页</a>
+            </Link>
+          }
+
         </div>
-        总数量{count}
+        当前第{pageNo}页/总计{Math.ceil(count/pageSize)}页
       </footer>
     </div>
   )
