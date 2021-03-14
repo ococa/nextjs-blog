@@ -22,7 +22,7 @@ const RegisterIndex: NextPage = () => {
       ...fd
     }).then(res => {
       console.log(res)
-      window.location.href = '/login'
+      // window.location.href = '/login'
     }).catch(e => {
       console.log(e)
     })

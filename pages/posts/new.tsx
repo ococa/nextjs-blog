@@ -4,10 +4,9 @@ import useForm from "../../package/utils/useForm";
 
 const PostsNew: NextPage = () => {
   const onSubmit = (fd) => {
-    console.log(fd.username)
-    request('/api/v1/posts', {
-      username: fd.username,
-      password: fd.password,
+    console.log(fd)
+    request('/api/v1/posts/new', {
+      ...fd
     }).then(res => {
       console.log(res)
     }).catch(e => {

@@ -3,6 +3,9 @@ import {User} from "../entity/User";
 import md5 from "md5";
 
 export class Login {
+
+    id: number;
+
     constructor(public username: string, public password: string) {
     }
 
@@ -16,6 +19,7 @@ export class Login {
         if (!user?.username || user?.password !== md5(password)) {
             this.errors.username.push('login error')
         }
+        this.id = user.id;
         // else {
             // this.errors.username.push('login success')
         // }
