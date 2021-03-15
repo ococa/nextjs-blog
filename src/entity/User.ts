@@ -10,7 +10,7 @@ import {
 } from "typeorm";
 import {Post} from "./Post";
 import {Comment} from "./Comment";
-import {getDatabaseConnection} from "../utils";
+// import {getDatabaseConnection} from "../utils";
 import md5 from "md5";
 import _ from "lodash";
 
@@ -70,12 +70,12 @@ export class User {
             this.errors.password.push('the password is different');
             return;
         }
-        const connection = await getDatabaseConnection();
+        // const connection = await getDatabaseConnection();
             // console.log(connection)
-        const userList = await connection.manager.find(User, { username });
-        if (userList.length > 0) {
-            this.errors.username.push('username is already register');
-        }
+        // const userList = await connection.manager.find(User, { username });
+        // if (userList.length > 0) {
+        //     this.errors.username.push('username is already register');
+        // }
     }
     hasErrors() {
         return !!Object.values(this.errors).find(v => v.length > 0)
