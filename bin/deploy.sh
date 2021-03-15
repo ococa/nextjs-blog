@@ -1,4 +1,4 @@
-docker start d1a &&
+docker start 9df31ec0b344 &&
 cd /home/root/nextjs-blog &&
 git pull &&
 yarn install --production=false &&
