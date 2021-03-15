@@ -11,7 +11,7 @@ type Props = {
 const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
-      <h1>文章列表</h1>
+      <h1>文章列表 真的好看</h1>
       {
         props?.posts.map(i => (
           <Link href={`/posts/${i?.id}`}>
